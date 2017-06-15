@@ -1,0 +1,29 @@
+<h1>Login</h1>
+<div class="row">
+    <div class="col-md-6 well">
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <fieldset>
+
+				<div class="form-group">
+                    <label>Username</label>
+                    <input [(ngModel)]="user.userName" name="userName" #name formControlName="userName" type="text" class="form-control">
+                    <div *ngIf="userName.touched && !userName.valid" class="alert alert-danger">
+                        Username is required.
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label>Password</label>
+                    <input [(ngModel)]="user.password" name="password" #name formControlName="password" type="password" class="form-control">
+                    <div *ngIf="password.touched && !password.valid" class="alert alert-danger">
+                        Password is required.
+                    </div>
+                </div>
+                
+            </fieldset>
+            
+            <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
+                Login
+            </button>
+        </form>
+    </div>
+</div>
