@@ -3,18 +3,23 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { AuthModule} from './auth/auth.module';
 import { StockModule} from './stock/stock.module';
-import { NewsSourceModule} from './newssource/newssource.module';
-
+import { UserStockModule } from './user-stock/user-stock.module';
 
 
 import {
 SharedModule,
+ApiService,
 AuthService,
-UsersService,
 StocksService,
 StockQuotesService,
 NewsSourcesService,
+UsersService,
+HelperService,
+StockStore,
+NewsSourceStore,
+UserStockQuoteStore,
 NavBarComponent
 } from './shared';
 
@@ -29,16 +34,22 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
   imports: [
     BrowserModule,
     SharedModule,
+    AuthModule,
     StockModule,
-    NewsSourceModule,
+    UserStockModule,
     rootRouting
   ],
   providers: [
+    ApiService,
     AuthService,
-    UsersService,
     StocksService,
     StockQuotesService,
-    NewsSourcesService
+    NewsSourcesService,
+    HelperService,
+    UsersService,
+    StockStore,
+    NewsSourceStore,
+    UserStockQuoteStore
   ],
   bootstrap: [AppComponent]
 })

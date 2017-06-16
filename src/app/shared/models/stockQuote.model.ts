@@ -1,25 +1,25 @@
 export class StockQuote {
 	symbol: string;
 	name: string;
-	lastPrice: double;
-	percentChange: double;
-	open: double;
-	high: double;
-	low: double;
-	close: double;
-	volume: int;
+	lastPrice: number;
+	percentChange: number;
+	open: number;
+	high: number;
+	low: number;
+	close: number;
+	volume: number;
 
 
 
 	constructor(symbol: string, 
 			name: string, 
-			lastPrice: double,
-			percentChange: double,
-			open: double,
-			high: double,
-			low: double,
-			close: double,
-			volume: int){
+			lastPrice: number,
+			percentChange: number,
+			open: number,
+			high: number,
+			low: number,
+			close: number,
+			volume: number){
 		this.symbol = symbol;
 		this.name = name;
 		this.percentChange = percentChange;

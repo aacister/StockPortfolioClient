@@ -3,19 +3,20 @@ import { Http }       from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import {BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import {StocksService} from './user.service';
-import {Stock } from '../models';
+import {StocksService} from '../services/stocks.service';
+import {Stock} from '../models';
 import {environment } from '../../../environments/environment';
 
 @Injectable()
 export class StockStore{
 	stocks: Observable<Stock[]>;
-	private _stocks: BehaviorSubject<StockQuote[]>;
+	private _stocks: BehaviorSubject<Stock[]>;
 	private dataStore: {stocks: Stock[] };
 	
 	constructor(private stocksService: StocksService){
-		this.dataStore = { stocks: [] });
+		this.dataStore = { stocks: [] };
 		this._stocks = new BehaviorSubject([]);
 		this.stocks = this._stocks.asObservable();
 		
@@ -28,8 +29,8 @@ export class StockStore{
 					this.dataStore.stocks = stocks;
 					this._stocks.next(Object.assign({}, this.dataStore).stocks);
 				},
-				err => console.log("Error retrieving stocks");
-			};
+				err => console.log("Error retrieving stocks")
+			);
 					
 	}
 
@@ -43,7 +44,7 @@ export class StockStore{
   	}
 
 	deleteStock(symbol: string) {
-    		this.stocksService.delete(symbol).subscribe(response => {
+    		this.stocksService.deleteStock(symbol).subscribe(response => {
       			this.dataStore.stocks.forEach((s, i) => {
         		if (s.symbol === symbol) {
           			this.dataStore.stocks.splice(s, 1);

@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { StockSearchComponent } from './common/common-stocksearch/common-stocksearch.component';
+//import { StockSearchComponent } from './common/common-stocksearch/common-stocksearch.component';
 
 @NgModule({
   imports: [
@@ -15,15 +15,14 @@ import { StockSearchComponent } from './common/common-stocksearch/common-stockse
     RouterModule
   ],
   declarations: [
-    StockSearchComponent
+   
   ],
   exports: [
     CommonModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
-    StockSearchComponent
+    RouterModule
   ]
 })
 export class SharedModule { }

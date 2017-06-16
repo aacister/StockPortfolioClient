@@ -3,8 +3,9 @@ import { Http }       from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import {BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import {NewsSourcesService} from './newssources.service';
+import {NewsSourcesService} from '../services/newssources.service';
 import {NewsSource } from '../models';
 import {environment } from '../../../environments/environment';
 
@@ -15,7 +16,7 @@ export class NewsSourceStore{
 	private dataStore: {newsSources: NewsSource[] };
 	
 	constructor(private newsSourcesService: NewsSourcesService){
-		this.dataStore = { newsSources: [] });
+		this.dataStore = { newsSources: [] };
 		this._newsSources = new BehaviorSubject([]);
 		this.newsSources = this._newsSources.asObservable();
 		
@@ -28,9 +29,8 @@ export class NewsSourceStore{
 					this.dataStore.newsSources = sources;
 					this._newsSources.next(Object.assign({}, this.dataStore).newsSources);
 				},
-				err => console.log("Error retrieving news sources.");
-			};
-					
+				err => console.log("Error retrieving news sources."));
+			
 	}
 
 	addNewsSource(source: NewsSource) {

@@ -2,15 +2,15 @@ import { Component, OnInit }                     from '@angular/core';
 import { FormBuilder, FormGroup, Validators }    from '@angular/forms';
 import { Router, ActivatedRoute }                from '@angular/router';
 
-import { AuthService } 				 from './shared/services/auth.service';
-import { User }                                  from './shared/models/user.model';
+import { AuthService }  from '../../shared/services/auth.service';
+import { User }         from '../../shared/models/user.model';
 
 
 
 @Component({
     templateUrl: 'auth-register.component.html'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent  {
 
     form: FormGroup;
     user = new User();

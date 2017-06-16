@@ -5,8 +5,8 @@ import { FormsModule,
 import { RouterModule }        from '@angular/router';
 import { HttpModule }          from '@angular/http';
 
-import { RegisterComponent }      from './auth-register.component';
-import { LoginComponent }      from './auth-login.component';
+import { RegisterComponent }      from './auth-register/auth-register.component';
+import { LoginComponent }      from './auth-login/auth-login.component';
 import {authRouting } 			from './auth.routing';
 import { SharedModule} from '../shared';
 

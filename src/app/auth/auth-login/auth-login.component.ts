@@ -2,15 +2,15 @@ import { Component, OnInit }                     from '@angular/core';
 import { FormBuilder, FormGroup, Validators }    from '@angular/forms';
 import { Router, ActivatedRoute }                from '@angular/router';
 
-import { AuthService } 				 			 from './shared/services/auth.service';
-import { Credentials }                           from './shared/models/credentials.model';
+import { AuthService } 	from '../../shared/services/auth.service';
+import { Credentials }  from '../../shared/models/credentials.model';
 
 
 
 @Component({
     templateUrl: 'auth-login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent{
 
     form: FormGroup;
     credentials = new Credentials();

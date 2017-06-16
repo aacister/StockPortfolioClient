@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Http }       from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 
-import { HelperService} from './helper.service';
-import { User, Stock, UserStock} from '../models';
+import { ApiService} from './api.service';
+import { User, Stock, UserStock, StockQuote, NewsSource, Article} from '../models';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class UsersService{
 	
-	constructor(private helperService: HelperService,
-			private _http: Http
+	constructor(private apiService: ApiService,
+			private _http: Http){
 	}
 
 	//User routes
 
 	getUser(username: string): Observable<any>{
 		return this._http.get(`${environment.api_url}/users/{username}`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((user: any) => {
 				return new User(
@@ -35,11 +36,11 @@ export class UsersService{
 
 	getUsers(): Observable<any>{
 		return this._http.get(`${environment.api_url}/users`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map(users => {
-				let result = Array<User> = [];
+				let result = new Array<User>();
 				users.forEach((user) => {
 					result.push(new User(
 						user.userName,
@@ -59,16 +60,16 @@ export class UsersService{
 	deleteUser(username: string): Observable<any>{
 		return this._http.delete(
 			`${environment.api_url}/users/{username}`,
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json());
 	}
 
-	addUser(user: User): Observablae<any>{
+	addUser(user: User): Observable<any>{
 		return this._http.post(
 			`${environment.api_url}/users/`, user,
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((newUser: any) => {
 				return new User(
@@ -87,8 +88,8 @@ export class UsersService{
 		return this._http.put(
 			`${environment.api_url}/users/{user.userName}`,
 			user,
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helpersService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((updatedUser: any) => {
 				return new User(
@@ -108,8 +109,8 @@ export class UsersService{
 	getStock(username: string, symbol: string) : Observable<any>
 	{
 		return this._http.get(`${environment.api_url}/users/{username}/stocks/{symbol}`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((stock: any) => {
 				return new Stock(
@@ -124,11 +125,11 @@ export class UsersService{
 	getStocks(username: string) : Observable<any>
 	{
 		return this._http.get(`${environment.api_url}/users/{username}/stocks`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map(stocks => {
-				let result = Array<Stock> = [];
+				let result = new Array<Stock>();
 				stocks.forEach((stock) => {
 					result.push(new Stock(
 						stock.symbol,
@@ -143,11 +144,11 @@ export class UsersService{
 	getStockQuotes(username: string): Observable<any>
 	{
 		return this._http.get(`${environment.api_url}/users/{username}/stockquotes`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map(quotes => {
-				let result = Array<StockQuote> = [];
+				let result = new Array<StockQuote>();
 				quotes.forEach((quote) => {
 					result.push(new StockQuote(
 						quote.symbol, 
@@ -170,8 +171,8 @@ export class UsersService{
 	{
 		return this._http.post(
 			`${environment.api_url}/users/{username}/stocks/{symbol}`, {},
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((addStock: any) => {
 				return new Stock(
@@ -186,8 +187,8 @@ export class UsersService{
 	{
 		return this._http.delete(
 			`${environment.api_url}/users/{username}/stocks/{symbol}`,
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json());
 	}
 
@@ -196,8 +197,8 @@ export class UsersService{
 	getNewsSource(username: string, sourceId: string) : Observable<any>
 	{
 		return this._http.get(`${environment.api_url}/users/{username}/newssources/{sourceId}`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((source: any) => {
 				return new NewsSource(
@@ -213,8 +214,8 @@ export class UsersService{
 	{
 		return this._http.post(
 			`${environment.api_url}/users/{username}/newssources/{sourceId}`, {},
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((source: any) => {
 				return new NewsSource(
@@ -229,8 +230,8 @@ export class UsersService{
 	{
 		return this._http.delete(
 			`${environment.api_url}/users/{username}/newssources/{sourceId}`,
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json());
 	}
 
@@ -238,11 +239,11 @@ export class UsersService{
 	getArticles(username: string, sourceId: string) : Observable<any>
 	{
 		return this._http.get(`${environment.api_url}/users/{username}/newssources/{sourceId}/articles`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map(articles => {
-				let result = Array<Article> = [];
+				let result = new Array<Article>();
 				articles.forEach((article) => {
 					result.push(new Article(
 						article.author,
@@ -260,11 +261,11 @@ export class UsersService{
 	getArticles(username: string): Observable<any>
 	{
 		return this._http.get(`${environment.api_url}/users/{username}/stockquotes`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map(quotes => {
-				let result = Array<StockQuote> = [];
+				let result = new Array<StockQuote>();
 				quotes.forEach((quote) => {
 					result.push(new StockQuote(
 						quote.symbol, 
@@ -274,7 +275,8 @@ export class UsersService{
 						quote.high,
 						quote.low,
 						quote.close,
-						quote.volume
+						quote.volume,
+						quote.logoUrl
 					));
 				});
 				return result;

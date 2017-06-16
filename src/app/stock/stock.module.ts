@@ -1,7 +1,7 @@
 import { NgModule }            from '@angular/core';
 
 import {stockRouting } 			from './stock.routing';
-import { StockQuoteComponent }    from './stock-quote/stock-quote.component';
+//import { StockQuoteComponent }    from './stock-quote/stock-quote.component';
 
 import { SharedModule} from '../shared';
 
@@ -12,7 +12,7 @@ import { SharedModule} from '../shared';
 		stockRouting
     ],
     declarations: [
-        StockQuoteComponent
+     //   StockQuoteComponent
 
     ],
     providers: []

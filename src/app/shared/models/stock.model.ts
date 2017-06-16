@@ -8,7 +8,7 @@ export class Stock {
 	constructor(symbol: string, name: string, logoUrl){
 		this.symbol = symbol;
 		this.name = name;
-		this.logUrl = logoUrl;
+		this.logoUrl = logoUrl;
 
 
 	}

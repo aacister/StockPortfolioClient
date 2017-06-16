@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Http }       from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 
-import { HelperService} from './helper.service';
+import { ApiService} from './api.service';
 import { NewsSource} from '../models';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class NewsSourcesService{
 	
-	constructor(private helperService: HelperService,
-			private _http: Http
+	constructor(private apiService: ApiService,
+			private _http: Http){
 	}
 
 	getNewsSource(sourceId: string): Observable<any>{
 		return this._http.get(`${environment.api_url}/newssources/{sourceId}`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
 			.map((source: any) => {
 				return new NewsSource(
@@ -27,13 +28,13 @@ export class NewsSourcesService{
 			});	
 	}
 
-	getNewSources(): Observable<any>{
+	getNewsSources(): Observable<any>{
 		return this._http.get(`${environment.api_url}/newssources`,
-			{headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
-			.map(source => {
-				let result = Array<NewsSource> = [];
+			.map(sources => {
+				let result = new Array<NewsSource>();
 				sources.forEach((source) => {
 					result.push(new NewsSource(
 						source.id,
@@ -48,17 +49,17 @@ export class NewsSourcesService{
 
 
 
-	addNewsSource(source: NewsSource): Observablae<any>{
+	addNewsSource(source: NewsSource): Observable<any>{
 		return this._http.post(
 			`${environment.api_url}/newssources/`, source,
-			{ headers: this.helperService.setHeaders()})
-			.catch(this.helperService.formatErrors)
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
-			.map((newSource: any) => {
+			.map((newsSource: any) => {
 				return new NewsSource(
-					newsource.id,
-					newSource.name,
-					newSource.description
+					newsSource.id,
+					newsSource.name,
+					newsSource.description
 
 					);
 			});	

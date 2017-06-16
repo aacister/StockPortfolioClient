@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Http }       from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 import {Router } from '@angular/router';
 
-import { UserService} from './user.service';
-import { HelperService} from './helper.service';
-import { User, Credential} from '../models';
+import { UsersService} from './users.service';
+import { ApiService} from './api.service';
+import { User, Credentials} from '../models';
 import { environment } from '../../../environments/environment';
 
 
 @Injectable()
 export class AuthService {
-	
-	
 
-	constructor(private userService: UserService,
-		 private helperService: HelperService,
+	constructor(private usersService: UsersService,
+		 private apiService: ApiService,
 		 private _http: Http,
 		 private _window: Window,
 		 private _router: Router){
@@ -48,10 +47,10 @@ export class AuthService {
 		if(this.isLoggedIn())
 		{
 			let token = this.getToken();
-			let payload = JSON.parse($window.atob(token.split('.')[1]));
+			let payload = JSON.parse(_window.atob(token.split('.')[1]));
 
 			let id = payload._id
-			return this.userService.getUser(id).then(function(res){
+			return this.usersService.getUser(id).then(function(res){
 				return res.data;
 			});
 		}
@@ -59,8 +58,8 @@ export class AuthService {
 
 	register(user: User){
 		return this._http.post(`${environment.api_url}/register`, JSON.stringify(user),
-		{headers: this.helperService.setHeaders()})
-		.catch(this.helperService.formatErrors)
+		{headers: this.apiService.setHeaders()})
+		.catch(this.apiService.formatErrors)
 		.map((res: Response) => res.json())
 		.subscribe((data) => this.saveToken(data.accessToken));
     	}
@@ -68,8 +67,8 @@ export class AuthService {
 	login(credential: Credential)
 	{
 		return this._http.post(`${environment.api_url}/login`, JSON.stringify(credential),
-		{headers: this.helperService.setHeaders()})
-		.catch(this.helperService.formatErrors)
+		{headers: this.apiService.setHeaders()})
+		.catch(this.apiService.formatErrors)
 		.map((res: Response) => res.json())
 		.subscribe((data) => this.saveToken(data.accessToken));
 	}

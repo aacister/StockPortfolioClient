@@ -1,5 +1,5 @@
 import {Stock} from './stock.model';
-import {News} from './news.model';
+import {NewsSource} from './newsSource.model';
 
 export class User {
 	userName: string;
@@ -8,7 +8,7 @@ export class User {
 	lastName: string;
 	zip: string;
 	stocks: Array<Stock>;
-	news: Array<News>;
+	news: Array<NewsSource>;
 
 
 	constructor(username: string, password: string, first, last, zip, stocks, news){
