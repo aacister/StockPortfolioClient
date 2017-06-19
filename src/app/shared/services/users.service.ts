@@ -130,11 +130,21 @@ export class UsersService{
 
 	//User NewsSource routes
 
-	getNewsSource(username: string, sourceId: string) : Observable<any>
+	getNewsSources(username: string) : Observable<any>
 	{
-		return this._http.get(`${environment.api_url}/users/{username}/newssources/{sourceId}`,
+		return this._http.get(`${environment.api_url}/users/{username}/newssources`,
 			{headers: this.apiService.setHeaders()})
-			.catch(this.apiService.formatErrors);	
+			.catch(this.apiService.formatErrors)
+			.map((res) => {
+				let sources = (<Object[]>res.json())
+					.map((source: any) => 
+						new NewsSource(
+						source.id,
+					source.name,
+					source.description
+					));
+				return sources;
+			});
 
 	}
 
