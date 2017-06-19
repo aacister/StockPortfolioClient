@@ -44,10 +44,11 @@ export class StockStore{
   	}
 
 	deleteStock(symbol: string) {
-    		this.stocksService.deleteStock(symbol).subscribe(response => {
+    		this.stocksService.deleteStock(symbol)
+			.subscribe(response => {
       			this.dataStore.stocks.forEach((s, i) => {
         		if (s.symbol === symbol) {
-          			this.dataStore.stocks.splice(s, 1);
+          			this.dataStore.stocks.splice(i, 1);
         		}
       		});
 

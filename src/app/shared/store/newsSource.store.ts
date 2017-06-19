@@ -25,7 +25,7 @@ export class NewsSourceStore{
 	loadData(){
 		this.newsSourcesService.getNewsSources()
 			.subscribe(
-				sources => {
+				(sources) => {	
 					this.dataStore.newsSources = sources;
 					this._newsSources.next(Object.assign({}, this.dataStore).newsSources);
 				},
@@ -35,8 +35,8 @@ export class NewsSourceStore{
 
 	addNewsSource(source: NewsSource) {
     		this.newsSourcesService.addNewsSource(source)
-      		.subscribe(sourceAdded => {
-      		this.dataStore.newsSources.push(sourceAdded);
+      		.subscribe((source: NewsSource) => {
+			this.dataStore.newsSources.push(source);
       		this._newsSources.next(Object.assign({}, this.dataStore).newsSources);
     		}, error => console.log('Could not add news source.'
 		));

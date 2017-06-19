@@ -14,37 +14,17 @@ export class NewsSourcesService{
 			private _http: Http){
 	}
 
-	getNewsSource(sourceId: string): Observable<any>{
-		return this._http.get(`${environment.api_url}/newssources/{sourceId}`,
-			{headers: this.apiService.setHeaders()})
-			.catch(this.apiService.formatErrors)
-			.map((res: Response) => res.json())
-			.map((source: any) => {
-				return new NewsSource(
-					source.id,
-					source.name,
-					source.description
-					);
-			});	
-	}
 
 	getNewsSources(): Observable<any>{
 		return this._http.get(`${environment.api_url}/newssources`,
 			{headers: this.apiService.setHeaders()})
 			.catch(this.apiService.formatErrors)
-			.map((res: Response) => res.json())
-			.map(sources => {
-				let result = new Array<NewsSource>();
-				sources.forEach((source) => {
-					result.push(new NewsSource(
-						source.id,
-						source.name,
-						source.description
-					));
-				});
-				return result;
+			.map((res) => {
+				let sources = (<Object[]>res.json())
+					.map((source: any) => 
+						new NewsSource(source.id, source.name, source.description));
+				return sources;
 			});
-			
 	}
 
 
@@ -55,14 +35,13 @@ export class NewsSourcesService{
 			{ headers: this.apiService.setHeaders()})
 			.catch(this.apiService.formatErrors)
 			.map((res: Response) => res.json())
-			.map((newsSource: any) => {
-				return new NewsSource(
-					newsSource.id,
-					newsSource.name,
-					newsSource.description
-
+			.map((source: any) => {
+				return new (
+					source.id,
+					source.name,
+					source.description
 					);
-			});	
+			});
 	}
 
 
