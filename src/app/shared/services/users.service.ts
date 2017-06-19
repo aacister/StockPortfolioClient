@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class UsersService{
-	
+
 	constructor(private apiService: ApiService,
 			private _http: Http){
 	}
@@ -31,7 +31,7 @@ export class UsersService{
 					user.stocks,
 					user.news
 					);
-			});	
+			});
 	}
 
 	getUsers(): Observable<any>{
@@ -40,7 +40,7 @@ export class UsersService{
 			.catch(this.apiService.formatErrors)
 			.map((res) => {
 				let users = (<Object[]>res.json())
-					.map((user: any) => 
+					.map((user: any) =>
 						new User(
 						user.userName,
 						user.password,
@@ -51,7 +51,7 @@ export class UsersService{
 						user.news
 					));
 				return users;
-			});	
+			});
 	}
 
 	deleteUser(username: string): Observable<any>{
@@ -78,7 +78,7 @@ export class UsersService{
 					newUser.stocks,
 					newUser.news
 					);
-			});	
+			});
 	}
 
 	updateUser(user: User) : Observable<any>{
@@ -98,7 +98,7 @@ export class UsersService{
 					updatedUser.stocks,
 					updatedUser.news
 					);
-			});	
+			});
 	}
 
 	//User stock routes
@@ -110,9 +110,9 @@ export class UsersService{
 			.catch(this.apiService.formatErrors)
 			.map((res) => {
 				let quotes = (<Object[]>res.json())
-					.map((quote: any) => 
+					.map((quote: any) =>
 						new StockQuote(
-						quote.symbol, 
+						quote.symbol,
 						quote.name,
 						quote.lastPrice,
 						quote.percentChange,
@@ -126,7 +126,38 @@ export class UsersService{
 			});
 	}
 
+	addStockQuote(username: string, symbol: string) : Observable<any>
+	{
+		return this._http.post(
+			`${environment.api_url}/users/{username}/stockquotes/{symbol}`, {},
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors)
+			.map((res: Response) => res.json())
+			.map((quote: any) => {
+				return new StockQuote(
+				quote.symbol,
+				quote.name,
+				quote.lastPrice,
+				quote.percentChange,
+				quote.open,
+				quote.high,
+				quote.low,
+				quote.close,
+				quote.volume
+					);
+			});
+	}
+
+	removeStockQuote(username: string, symbol: string) : Observable<any>
+	{
+		return this._http.delete(
+			`${environment.api_url}/users/{username}/stockquotes/{symbol}`,
+			{ headers: this.apiService.setHeaders()})
+			.catch(this.apiService.formatErrors);
 	
+	}
+
+
 
 	//User NewsSource routes
 
@@ -137,7 +168,7 @@ export class UsersService{
 			.catch(this.apiService.formatErrors)
 			.map((res) => {
 				let sources = (<Object[]>res.json())
-					.map((source: any) => 
+					.map((source: any) =>
 						new NewsSource(
 						source.id,
 					source.name,
@@ -153,7 +184,15 @@ export class UsersService{
 		return this._http.post(
 			`${environment.api_url}/users/{username}/newssources/{sourceId}`, {},
 			{ headers: this.apiService.setHeaders()})
-			.catch(this.apiService.formatErrors);	
+			.catch(this.apiService.formatErrors)
+			.map((res: Response) => res.json())
+			.map((source: any) => {
+				return new NewsSource(
+				source.id,
+				source.name,
+				source.description
+					);
+			});
 	}
 
 	removeNewsSource(username: string, sourceId: string) : Observable<any>
@@ -162,7 +201,7 @@ export class UsersService{
 			`${environment.api_url}/users/{username}/newssources/{sourceId}`,
 			{ headers: this.apiService.setHeaders()})
 			.catch(this.apiService.formatErrors);
-	
+
 	}
 
 	//User Article routes
@@ -173,7 +212,7 @@ export class UsersService{
 			.catch(this.apiService.formatErrors)
 			.map((res) => {
 				let articles = (<Object[]>res.json())
-					.map((article: any) => 
+					.map((article: any) =>
 						new Article(
 						article.author,
 						article.title,
@@ -184,7 +223,7 @@ export class UsersService{
 					));
 				return articles;
 			});
-			
+
 	}
 
 }

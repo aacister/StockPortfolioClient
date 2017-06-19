@@ -14,14 +14,14 @@ export class UserStockQuoteStore{
 	userQuotes: Observable<StockQuote[]>;
 	private _userQuotes: BehaviorSubject<StockQuote[]>;
 	private dataStore: {userQuotes: StockQuote[] };
-	
+
 	constructor(private usersService: UsersService){
 		this.dataStore = { userQuotes: [] };
 		this._userQuotes = new BehaviorSubject([]);
 		this.userQuotes = this._userQuotes.asObservable();
-		
+
 	}
-	
+
 	loadData(username: string){
 		this.usersService.getStockQuotes(username)
 			.subscribe(
@@ -30,9 +30,30 @@ export class UserStockQuoteStore{
 					this._userQuotes.next(Object.assign({}, this.dataStore).userQuotes);
 				},
 				err => console.log("Error retrieving user stock quotes")
-				
+
 			);
-					
 	}
-	
+
+	addStockQuote(string username, string symbol) {
+    		this.usersService.addStockQuote(username, symbol)
+      		.subscribe((quote: StockQuote) => {
+			this.dataStore.userQuotes.push(quote);
+      		this._userQuotes.next(Object.assign({}, this.dataStore).userQuotes);
+    		}, error => console.log('Could not add user quote.'
+		));
+  	}
+
+		deleteStockQuote(string username, string symbol){
+			this.usersService.removeStockQuote(username, symbol)
+			.subscribe(response => {
+						this.dataStore.userQuotes.forEach((s, i) => {
+						if (s.symbol === symbol) {
+								this.dataStore.userQuotes.splice(i, 1);
+						}
+					});
+
+					this._userQuotes.next(Object.assign({}, this.dataStore).userQuotes);
+				}, error => console.log('Could not delete user quote.'));
+		}
+
 }
