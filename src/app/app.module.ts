@@ -16,10 +16,13 @@ StocksService,
 StockQuotesService,
 NewsSourcesService,
 UsersService,
+JwtService
 HelperService,
 StockStore,
 NewsSourceStore,
 UserStockQuoteStore,
+UserNewsSourceStore,
+UserArticleStore,
 NavBarComponent
 } from './shared';
 
@@ -47,9 +50,12 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
     NewsSourcesService,
     HelperService,
     UsersService,
+    JwtService,
     StockStore,
     NewsSourceStore,
-    UserStockQuoteStore
+    UserStockQuoteStore,
+    UserNewsSourceStore,
+    UserArticleStore
   ],
   bootstrap: [AppComponent]
 })

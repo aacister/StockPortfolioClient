@@ -3,7 +3,7 @@ import {NewsSource} from './newsSource.model';
 
 export class User {
 	userName: string;
-	password: string;
+	token: string;
 	firstName: string;
 	lastName: string;
 	zip: string;
@@ -11,9 +11,9 @@ export class User {
 	news: Array<NewsSource>;
 
 
-	constructor(username: string, password: string, first, last, zip, stocks, news){
+	constructor(username, token, first, last, zip, stocks, news){
 		this.userName = username;
-		this.password = password;
+		this.token = token;
 		this.firstName = first;
 		this.lastName = last;
 		this.zip = zip;

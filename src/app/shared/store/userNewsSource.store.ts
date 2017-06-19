@@ -35,7 +35,7 @@ export class UserNewsSourceStore{
 
 	}
 
-	addNewsSource(string username, string sourceId) {
+	addNewsSource(username: string, sourceId: string) {
     		this.newsSourcesService.addNewsSource(username, sourceId)
       		.subscribe((source: NewsSource) => {
 			this.dataStore.newsSources.push(source);
@@ -44,7 +44,7 @@ export class UserNewsSourceStore{
 		));
   	}
 
-		deleteNewsSource(string username, string sourceId){
+		deleteNewsSource(username: string, sourceId: string){
 			this.newsSourceService.removeNewsSource(username, sourceId)
 			.subscribe(response => {
 						this.dataStore.newsSources.forEach((s, i) => {

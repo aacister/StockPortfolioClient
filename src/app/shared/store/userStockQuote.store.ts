@@ -34,7 +34,7 @@ export class UserStockQuoteStore{
 			);
 	}
 
-	addStockQuote(string username, string symbol) {
+	addStockQuote(username: string, symbol: string) {
     		this.usersService.addStockQuote(username, symbol)
       		.subscribe((quote: StockQuote) => {
 			this.dataStore.userQuotes.push(quote);
@@ -43,7 +43,7 @@ export class UserStockQuoteStore{
 		));
   	}
 
-		deleteStockQuote(string username, string symbol){
+		deleteStockQuote(username: string, symbol: string){
 			this.usersService.removeStockQuote(username, symbol)
 			.subscribe(response => {
 						this.dataStore.userQuotes.forEach((s, i) => {

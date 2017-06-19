@@ -14,25 +14,25 @@ export class UserArticleStore{
 	userArticles: Observable<Article[]>;
 	private _userArticles: BehaviorSubject<Article[]>;
 	private dataStore: {userArticles: Article[] };
-	
+
 	constructor(private usersService: UsersService){
 		this.dataStore = { userArticles: [] };
 		this._userArticles = new BehaviorSubject([]);
 		this.userArticles = this._userArticles.asObservable();
-		
+
 	}
-	
+
 	loadData(username: string){
-		this.usersService.getArticles(username)
+		this.usersService.getArticles(username: string)
 			.subscribe(
 				articles => {
 					this.dataStore.userArticles = articles;
 					this._userArticles.next(Object.assign({}, this.dataStore).userArticles);
 				},
 				err => console.log("Error retrieving user articles")
-				
+
 			);
-					
+
 	}
-	
+
 }

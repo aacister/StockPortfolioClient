@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import {User, Stock, UsersService} from '../../shared';
+import {User, StockQuote, UserStockQuoteStore} from '../../shared';
 
 
 @Component({
@@ -12,10 +12,10 @@ import {User, Stock, UsersService} from '../../shared';
 
 export class UserStockListComponent implements OnInit{
  private contactList: Observable<Stock[]>;
- private userStockList: Stock[] = [];
+ private userStockQuoteList: StockQuote[] = [];
 
 	constructor(
-		private usersService: UsersService
+		private userStockQuoteStore: UserStockQuoteStore
 	) {
 
 	}
@@ -25,10 +25,9 @@ export class UserStockListComponent implements OnInit{
 		loadStocks();
 
 	}
-	
+
 	private loadStocks(){
-        this.usersService.getStocks()
-            .subscribe(stocks => this.userStockList = stocks);
+        this.userStockQuoteStore.loadData();
     }
 
 

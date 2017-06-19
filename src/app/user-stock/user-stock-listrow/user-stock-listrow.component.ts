@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Stock} from '../../shared';
+import { StockQuote} from '../../shared';
 
 @Component({
  selector: 'user-stock-listrow',
@@ -11,5 +11,5 @@ export class UserStockListRowComponent {
 
  constructor() {}
 
-	@Input() stock: Stock;
+	@Input() quote: StockQuote;
 }

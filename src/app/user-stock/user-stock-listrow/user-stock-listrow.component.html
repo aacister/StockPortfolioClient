@@ -1,13 +1,12 @@
 <tr>
-		<td> {{stock.logoUrl}}</td>
+		<td> {{quote.symbol}}</td>
         <td>
-			<a [routerLink]="[stock.symbol]">
-				{{stock.symbol}} 
+			<a [routerLink]="[quote.symbol]">
+				{{quote.symbol}}
 			</a>
 		</td>
-		<td>{{stock.lastPrice}}</td>
-		<td> {{stock.percentChange}}</td>
-		
-		
-</tr>
+		<td>{{quote.lastPrice}}</td>
+		<td> {{quote.percentChange}}</td>
 
+
+</tr>
