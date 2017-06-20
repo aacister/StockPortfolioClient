@@ -11,7 +11,7 @@ import {User, StockQuote, UserStockQuoteStore} from '../../shared';
 })
 
 export class UserStockListComponent implements OnInit{
- private contactList: Observable<Stock[]>;
+ private contactList: Observable<StockQuote[]>;
  private userStockQuoteList: StockQuote[] = [];
 
 	constructor(
@@ -22,12 +22,12 @@ export class UserStockListComponent implements OnInit{
 
 	ngOnInit() {
 
-		loadStocks();
+		this.loadStocks();
 
 	}
 
 	private loadStocks(){
-        this.userStockQuoteStore.loadData();
+        this.userStockQuoteStore.loadData('aacister');
     }
 
 

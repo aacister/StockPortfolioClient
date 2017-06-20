@@ -16,7 +16,7 @@ StocksService,
 StockQuotesService,
 NewsSourcesService,
 UsersService,
-JwtService
+JwtService,
 HelperService,
 StockStore,
 NewsSourceStore,

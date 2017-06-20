@@ -23,11 +23,11 @@ export class UserNewsSourceStore{
 	}
 
 	loadData(username: string){
-		this.usersService.getNewsSource(username)
+		this.usersService.getNewsSources(username)
 			.subscribe(
 				quotes => {
-					this.dataStore.userQuotes = quotes;
-					this._userQuotes.next(Object.assign({}, this.dataStore).userQuotes);
+					this.dataStore.userNewsSources = quotes;
+					this._userNewsSources.next(Object.assign({}, this.dataStore).userNewsSources);
 				},
 				err => console.log("Error retrieving user stock quotes")
 
@@ -36,24 +36,24 @@ export class UserNewsSourceStore{
 	}
 
 	addNewsSource(username: string, sourceId: string) {
-    		this.newsSourcesService.addNewsSource(username, sourceId)
+    		this.usersService.addNewsSource(username, sourceId)
       		.subscribe((source: NewsSource) => {
-			this.dataStore.newsSources.push(source);
-      		this._newsSources.next(Object.assign({}, this.dataStore).newsSources);
+			this.dataStore.userNewsSources.push(source);
+      		this._userNewsSources.next(Object.assign({}, this.dataStore).userNewsSources);
     		}, error => console.log('Could not add news source.'
 		));
   	}
 
 		deleteNewsSource(username: string, sourceId: string){
-			this.newsSourceService.removeNewsSource(username, sourceId)
+			this.usersService.removeNewsSource(username, sourceId)
 			.subscribe(response => {
-						this.dataStore.newsSources.forEach((s, i) => {
-						if (s.sourceId === sourceId) {
-								this.dataStore.newsSources.splice(i, 1);
+						this.dataStore.userNewsSources.forEach((s, i) => {
+						if (s.id === sourceId) {
+								this.dataStore.userNewsSources.splice(i, 1);
 						}
 					});
 
-					this._newsSources.next(Object.assign({}, this.dataStore).newsSources);
+					this._userNewsSources.next(Object.assign({}, this.dataStore).userNewsSources);
 				}, error => console.log('Could not delete news source.'));
 		}
 

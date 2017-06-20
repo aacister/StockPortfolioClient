@@ -7,7 +7,8 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import {Router } from '@angular/router';
 
 import { UsersService} from './users.service';
-import { ApiService, JwtService} from './api.service';
+import { ApiService} from './api.service';
+import { JwtService } from './jwt.service';
 import { User, Credentials} from '../models';
 import { environment } from '../../../environments/environment';
 
@@ -45,7 +46,7 @@ export class AuthService {
 		return this.currentUserSubject.value;
 	}
 
-	register(credentials: Credentials)
+	register(credentials: Credentials): Observable<User>
 	{
 		return this._http.post(`${environment.api_url}/register`, JSON.stringify(credentials),
 		{headers: this.apiService.setHeaders()})
@@ -62,10 +63,13 @@ export class AuthService {
 				user.news
 				);
 		})
-		.subscribe((user: User) => this.jwtService.setAuth(user));
+		.map((user: User) => {
+			this.setAuth(user);
+			return user;
+		});
   }
 
-	login(credentials: Credentials)
+	login(credentials: Credentials):Observable<User>
 	{
 		return this._http.post(`${environment.api_url}/login`, JSON.stringify(credentials),
 		{headers: this.apiService.setHeaders()})
@@ -82,7 +86,10 @@ export class AuthService {
 				user.news
 				);
 		})
-		.subscribe((user: User) => this.setAuth(user));
+		.map((user: User) => {
+			this.setAuth(user);
+			return user;
+		});
 	}
 
 	logout() {

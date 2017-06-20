@@ -4,6 +4,7 @@ import { Router, ActivatedRoute }                from '@angular/router';
 
 import { AuthService }  from '../../shared/services/auth.service';
 import { User }         from '../../shared/models/user.model';
+import { Credentials }  from '../../shared/models/credentials.model';
 
 
 
@@ -13,8 +14,8 @@ import { User }         from '../../shared/models/user.model';
 export class RegisterComponent  {
 
     form: FormGroup;
-    user = new User();
-
+    user = new User('', '', '', '', '', [], []);
+	credentials = new Credentials('','');
 
 	constructor(
         fb: FormBuilder,
@@ -34,8 +35,8 @@ export class RegisterComponent  {
 
 
      register(){
-	var result = this._authService.register(this.user);
-	result.subscribe(x => {
+	this._authService.register(this.credentials)
+	.subscribe((user: User)=> {
 		//mark as pristine
 		this._router.navigate(['home']);
 	});

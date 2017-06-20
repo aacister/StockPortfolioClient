@@ -23,7 +23,7 @@ export class UserArticleStore{
 	}
 
 	loadData(username: string){
-		this.usersService.getArticles(username: string)
+		this.usersService.getArticles(username)
 			.subscribe(
 				articles => {
 					this.dataStore.userArticles = articles;
