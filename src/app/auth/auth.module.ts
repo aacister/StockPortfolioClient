@@ -1,6 +1,6 @@
 import { NgModule }            from '@angular/core';
 import { CommonModule }        from '@angular/common';
-import { FormsModule, 
+import { FormsModule,
          ReactiveFormsModule } from '@angular/forms';
 import { RouterModule }        from '@angular/router';
 import { HttpModule }          from '@angular/http';
@@ -16,10 +16,11 @@ import { SharedModule} from '../shared';
 		authRouting
     ],
     declarations: [
-        RegisterComponent, 
+        RegisterComponent,
         LoginComponent
     ],
-    providers: []
+    providers: [
+    ]
 })
-export class AuthModule { 
+export class AuthModule {
 }

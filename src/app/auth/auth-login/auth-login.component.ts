@@ -5,16 +5,19 @@ import { Router, ActivatedRoute }                from '@angular/router';
 import { AuthService } 	from '../../shared/services/auth.service';
 import { Credentials }  from '../../shared/models/credentials.model';
 import { User }         from '../../shared/models/user.model';
-
+import {Errors } from '../../shared/models/errors.model';
 
 
 @Component({
+    selector: 'auth-login',
     templateUrl: 'auth-login.component.html'
 })
 export class LoginComponent{
 
     form: FormGroup;
     credentials = new Credentials('','');
+    isSubmitting = false;
+    errors: Errors = new Errors();
 
 	constructor(
         fb: FormBuilder,
@@ -27,16 +30,22 @@ export class LoginComponent{
 			password: ['', Validators.required]
 		});
 	}
-    
 
+  login(){
+       this.isSubmitting = true;
+       this.errors = new Errors();
 
-     register(){
-	this._authService.register(this.credentials)
-	.subscribe((user: User) => {
-		//mark as pristine
-		this._router.navigate(['home']);
-	});
-	
+       const credentials = this.form.value;
+
+  	    this._authService.register(this.credentials)
+  	     .subscribe((user: User) => {
+  		     //mark as pristine
+  		       this._router.navigate(['home']);
+  	      }, (err) => {
+            this.errors = err;
+            this.isSubmitting = false;
+          });
+
      };
 
 
