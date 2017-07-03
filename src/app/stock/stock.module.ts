@@ -8,8 +8,8 @@ import { SharedModule} from '../shared';
 @NgModule({
     imports: [
 
-		SharedModule,
-		stockRouting
+		SharedModule
+	//	stockRouting
     ],
     declarations: [
      //   StockQuoteComponent
@@ -17,5 +17,5 @@ import { SharedModule} from '../shared';
     ],
     providers: []
 })
-export class StockModule { 
+export class StockModule {
 }

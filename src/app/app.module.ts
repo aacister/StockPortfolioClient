@@ -3,6 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import {HomeModule} from './home/home.module';
 import { AuthModule} from './auth/auth.module';
 import { StockModule} from './stock/stock.module';
 import { UserStockModule } from './user-stock/user-stock.module';
@@ -39,6 +40,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
     BrowserModule,
     SharedModule,
     AuthModule,
+    HomeModule,
     StockModule,
     UserStockModule,
     rootRouting

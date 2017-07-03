@@ -11,7 +11,6 @@ import {User, StockQuote, UserStockQuoteStore} from '../../shared';
 })
 
 export class UserStockListComponent implements OnInit{
- private contactList: Observable<StockQuote[]>;
  private userStockQuoteList: StockQuote[] = [];
 
 	constructor(

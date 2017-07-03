@@ -26,7 +26,6 @@ export class AuthService {
 		 private apiService: ApiService,
 		 private jwtService: JwtService,
 		 private _http: Http,
-		 private _window: Window,
 		 private _router: Router){
 	}
 

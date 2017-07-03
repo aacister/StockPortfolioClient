@@ -3,7 +3,7 @@ import { NgModule }            from '@angular/core';
 import {userStockRouting } 			from './user-stock.routing';
 import { UserStockHomeComponent } from './user-stock-home/user-stock-home.component';
 import { UserStockListComponent }    from './user-stock-list/user-stock-list.component';
-import { UserStockListRowComponent } from './user-stock-listrow/user-stock-listrow.component';
+import { UserStockRowComponent } from './user-stock-row/user-stock-row.component';
 /*
 import { UserStockAddComponent } from './user-stock/user-stock-add/user-stock-add';
 import { UserNewsHomeComponent } from './user-news/user-news-home/user-news-home.component';
@@ -16,13 +16,14 @@ import { SharedModule} from '../shared';
 @NgModule({
     imports: [
 
-		SharedModule,
-		userStockRouting
+		SharedModule
+	//	userStockRouting
     ],
     declarations: [
-  
+
         UserStockHomeComponent,
-		UserStockListComponent
+		UserStockListComponent,
+    UserStockRowComponent
 		/*
 		UserStockRowComponent,
 		UserStockAddComponent,
@@ -33,5 +34,5 @@ import { SharedModule} from '../shared';
     ],
     providers: []
 })
-export class UserStockModule { 
+export class UserStockModule {
 }
