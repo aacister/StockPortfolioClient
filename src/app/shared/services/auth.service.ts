@@ -29,8 +29,37 @@ export class AuthService {
 		 private _router: Router){
 	}
 
+  populate() {
+   if (this.jwtService.getToken() && this.jwtService.getCurrentUser()) {
+     let username = this.jwtService.getCurrentUser();
+     this._http.get(`${environment.api_url}/users/{username}`,
+     {headers: this.apiService.setHeaders()})
+     .catch(this.apiService.formatErrors)
+     .map((res: Response) => res.json())
+    . map((user: any) => {
+       return new User(
+         user.userName,
+         user.token,
+         user.firstName,
+         user.lastName,
+         user.zip,
+         user.stocks,
+         user.news
+         );
+     })
+     .subscribe((user:User) => this.setAuth(user),
+        err => this.purgeAuth()
+      );
+   }
+   else
+   {
+    this.purgeAuth();
+   }
+  }
+
+
 	setAuth(user: User) {
-     this.jwtService.saveToken(user.token);
+     this.jwtService.saveToken(user);
      this.currentUserSubject.next(user);
      this.isAuthenticatedSubject.next(true);
    }
@@ -95,6 +124,5 @@ export class AuthService {
 		this.purgeAuth();
 
 	}
-
 
 }

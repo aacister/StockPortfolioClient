@@ -21,7 +21,7 @@ import { SharedModule} from '../shared';
     ],
     declarations: [
 
-        UserStockHomeComponent,
+    UserStockHomeComponent,
 		UserStockListComponent,
     UserStockRowComponent
 		/*

@@ -1,6 +1,7 @@
 <h1>Login</h1>
 <div class="row">
     <div class="col-md-6 well">
+        <list-errors [errors]="errors"></list-errors>
         <form [formGroup]="form" (ngSubmit)="login()">
             <fieldset>
 
@@ -18,9 +19,9 @@
                         Password is required.
                     </div>
                 </div>
-                
+
             </fieldset>
-            
+
             <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
                 Login
             </button>

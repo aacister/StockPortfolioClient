@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 
+import { User} from '../models';
 
 @Injectable()
 export class JwtService {
 
   getToken(): String {
-    return window.localStorage['stockPortfolio-token'];
+    return window.localStorage['stockPortfolio-token'].token;
   }
 
-  saveToken(token: String) {
-    window.localStorage['stockPortfolio-token'] = token;
+  getCurrentUser(): String {
+    return window.localStorage['stockPortfolio-token'].username;
+  }
+
+  saveToken(user: User) {
+    window.localStorage['stockPortfolio-token'] = user.token;
+     window.localStorage.setItem('stockPortfolio-token', JSON.stringify({ username: user.userName, token: user.token }));
   }
 
   destroyToken() {

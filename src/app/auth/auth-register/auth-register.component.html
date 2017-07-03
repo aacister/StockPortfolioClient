@@ -1,6 +1,7 @@
 <h1>Register</h1>
 <div class="row">
     <div class="col-md-6 well">
+        <list-errors [errors]="errors"></list-errors>
         <form [formGroup]="form" (ngSubmit)="register()">
             <fieldset>
                 <legend>
@@ -41,9 +42,9 @@
                     <label>Zip Code</label>
                     <input [(ngModel)]="user.zip" name="zip" #name formControlName="zip" type="text" class="form-control">
                 </div>
- 
+
             </fieldset>
-            
+
             <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
                 Register
             </button>

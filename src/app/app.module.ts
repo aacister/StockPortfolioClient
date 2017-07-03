@@ -3,6 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { NavBarModule } from './navbar/navbar.module';
 import {HomeModule} from './home/home.module';
 import { AuthModule} from './auth/auth.module';
 import { StockModule} from './stock/stock.module';
@@ -19,21 +20,19 @@ NewsSourcesService,
 UsersService,
 JwtService,
 AuthGuard,
-HelperService,
 StockStore,
 NewsSourceStore,
 UserStockQuoteStore,
 UserNewsSourceStore,
-UserArticleStore,
-NavBarComponent
+UserArticleStore
+
 } from './shared';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavBarComponent
+    AppComponent
 
   ],
   imports: [
@@ -41,6 +40,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
     SharedModule,
     AuthModule,
     HomeModule,
+    NavBarModule,
     StockModule,
     UserStockModule,
     rootRouting
@@ -51,7 +51,6 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
     StocksService,
     StockQuotesService,
     NewsSourcesService,
-    HelperService,
     UsersService,
     JwtService,
     AuthGuard,
