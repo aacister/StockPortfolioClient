@@ -2,17 +2,18 @@ import { RouterModule  }    		  from '@angular/router';
 
 import { RegisterComponent } 		  from './auth-register/auth-register.component';
 import { LoginComponent }    		  from './auth-login/auth-login.component';
-import {AuthGuard } 						from '../shared/services/auth-guard.service';
+import {NoAuthGuard } 						from '../shared/services/no-auth-guard.service';
+
 
 export const authRouting = RouterModule.forChild([
 	{
 		path: 'register',
 		component: RegisterComponent,
-		canActivate: [AuthGuard]
+		canActivate: [NoAuthGuard]
 	},
 	{
 		path: 'login',
 		component: LoginComponent,
-		canActivate: [AuthGuard]
+		canActivate: [NoAuthGuard]
 	}
 ]);

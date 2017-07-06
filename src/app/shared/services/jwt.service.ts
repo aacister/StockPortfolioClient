@@ -6,12 +6,9 @@ import { User} from '../models';
 export class JwtService {
 
   getToken(): String {
-    return window.localStorage['stockPortfolio-token'].token;
+    return window.localStorage['stockPortfolio-token'];
   }
 
-  getCurrentUser(): String {
-    return window.localStorage['stockPortfolio-token'].username;
-  }
 
   saveToken(user: User) {
     window.localStorage['stockPortfolio-token'] = user.token;

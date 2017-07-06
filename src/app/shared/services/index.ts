@@ -6,3 +6,4 @@ export * from './stocks.service';
 export * from './users.service';
 export * from './jwt.service';
 export * from './auth-guard.service';
+export * from './no-auth-guard.service';

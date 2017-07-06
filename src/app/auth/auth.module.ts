@@ -7,6 +7,7 @@ import { HttpModule }          from '@angular/http';
 
 import { RegisterComponent }      from './auth-register/auth-register.component';
 import { LoginComponent }      from './auth-login/auth-login.component';
+import {NoAuthGuard } 						from '../shared/services/no-auth-guard.service';
 import {authRouting } 			from './auth.routing';
 import { SharedModule} from '../shared';
 
@@ -20,6 +21,7 @@ import { SharedModule} from '../shared';
         LoginComponent
     ],
     providers: [
+    NoAuthGuard
     ]
 })
 export class AuthModule {

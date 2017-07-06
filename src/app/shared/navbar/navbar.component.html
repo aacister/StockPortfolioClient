@@ -17,14 +17,17 @@
         <li><a routerLink="stocks" routerLinkActive="active">Stocks</a></li>
         <li><a routerLink="news" routerLinkActive="active">News</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-show="isAuthenticated"><a href="">Welcome, {{currentUser.userName}}</a></li>
+      <ul *showAuthed="false" class="nav navbar-nav navbar-right">
+        <li><a href="">Welcome, {{currentUser.userName}}</a></li>
 
-	<li ng-hide="isAuthenticated"><a href=""><span class="glyphicon glyphicon-user"></span> Register</a></li>
+	<li><a href=""><span class="glyphicon glyphicon-user"></span> Register</a></li>
 	<li class='divider'></li>
-	<li ng-hide="isLoggedIn()"><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-<li ng-show="isAuthenticated"><a href="" ng-click="logOut">Logout</a></li>
-      </ul>
+	<li><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+<ul *showAuthed="true"
+      class="nav navbar-nav pull-xs-right">
+      <li><a href="" ng-click="logOut">Logout</a></li>
+</ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

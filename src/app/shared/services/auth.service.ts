@@ -30,8 +30,12 @@ export class AuthService {
 	}
 
   populate() {
-   if (this.jwtService.getToken() && this.jwtService.getCurrentUser()) {
-     let username = this.jwtService.getCurrentUser();
+   let token = this.jwtService.getToken();
+   console.log('Token: ' + JSON.stringify(token));
+
+   if (token) {
+     let objToken = JSON.parse(token);
+     let username = token.username;
      this._http.get(`${environment.api_url}/users/{username}`,
      {headers: this.apiService.setHeaders()})
      .catch(this.apiService.formatErrors)

@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { ListErrorsComponent } from './list-errors.component';
+import { ShowAuthedDirective } from './show-authed.directive';
 
-//import { StockSearchComponent } from './common/common-stocksearch/common-stocksearch.component';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import { ListErrorsComponent } from './list-errors.component';
     RouterModule
   ],
   declarations: [
-   ListErrorsComponent
+   ListErrorsComponent,
+   ShowAuthedDirective
   ],
   exports: [
     CommonModule,
@@ -25,7 +26,8 @@ import { ListErrorsComponent } from './list-errors.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    ListErrorsComponent
+    ListErrorsComponent,
+    ShowAuthedDirective
   ]
 })
 export class SharedModule { }

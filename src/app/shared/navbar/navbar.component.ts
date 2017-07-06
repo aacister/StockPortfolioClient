@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../../shared/models';
-import { AuthService } from '../../shared/services';
+import {
+User,
+AuthService,
+ShowAuthedDirective
+} from '../../shared';
 
 @Component({
     selector: 'navbar',
@@ -13,19 +16,12 @@ export class NavBarComponent implements OnInit {
   ) {}
 
   currentUser: User;
-  isAuthenticated: boolean = false;
 
   ngOnInit() {
     this.authService.currentUser.subscribe(
       (userData) => {
-        console.log('here');
-        this.currentUser = userData;
-      }
-    )
 
-    this.authService.isAuthenticated.subscribe(
-        (isAuthenticated) => {
-        this.isAuthenticated = isAuthenticated;
+        this.currentUser = userData;
       }
     )
 
