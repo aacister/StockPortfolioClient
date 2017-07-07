@@ -31,12 +31,14 @@ export class AuthService {
 
   populate() {
    let token = this.jwtService.getToken();
-   console.log('Token: ' + JSON.stringify(token));
+   console.log('Token: ' + token);
 
    if (token) {
      let objToken = JSON.parse(token);
-     let username = token.username;
-     this._http.get(`${environment.api_url}/users/{username}`,
+     console.log('Username: ' + objToken.username);
+     console.log('User token: ' + objToken.token);
+     let username = objToken.username;
+     this._http.get(`${environment.api_url}/users/${username}`,
      {headers: this.apiService.setHeaders()})
      .catch(this.apiService.formatErrors)
      .map((res: Response) => res.json())
@@ -68,10 +70,12 @@ export class AuthService {
      this.isAuthenticatedSubject.next(true);
    }
 
-	 purgeAuth() {
+	 purgeAuth(){
+    console.log('Purging auth.');
     this.jwtService.destroyToken();
     this.currentUserSubject.next(new User('','','', '','',[],[]));
     this.isAuthenticatedSubject.next(false);
+
   }
 
 	getCurrentUser() {
@@ -80,7 +84,7 @@ export class AuthService {
 
 	register(credentials: Credentials): Observable<User>
 	{
-		return this._http.post(`${environment.api_url}/register`, JSON.stringify(credentials),
+		return this._http.post(`${environment.api_url}/auth/register`, JSON.stringify(credentials),
 		{headers: this.apiService.setHeaders()})
 		.catch(this.apiService.formatErrors)
 		.map((res: Response) => res.json())
@@ -103,7 +107,7 @@ export class AuthService {
 
 	login(credentials: Credentials):Observable<User>
 	{
-		return this._http.post(`${environment.api_url}/login`, JSON.stringify(credentials),
+		return this._http.post(`${environment.api_url}/auth/login`, JSON.stringify(credentials),
 		{headers: this.apiService.setHeaders()})
 		.catch(this.apiService.formatErrors)
 		.map((res: Response) => res.json())
@@ -126,7 +130,7 @@ export class AuthService {
 
 	logout() {
 		this.purgeAuth();
-
+    this._router.navigate(['login']);
 	}
 
 }

@@ -23,10 +23,10 @@ export class RegisterComponent{
         fb: FormBuilder,
         private _router: Router,
         private _route: ActivatedRoute,
-	private _authService: AuthService
+	       private _authService: AuthService
     ) {
 		this.form = fb.group({
-			userName: ['', Validators.required],
+			username: ['', Validators.required],
 			password: ['', Validators.required]
 		});
 	}
@@ -37,10 +37,9 @@ export class RegisterComponent{
 
        const credentials = this.form.value;
 
-  	    this._authService.register(this.credentials)
+  	    this._authService.register(credentials)
   	     .subscribe((user: User) => {
-  		     //mark as pristine
-  		       this._router.navigate(['home']);
+  		       this._router.navigateByUrl('/')
   	      }, (err) => {
             this.errors = err;
             this.isSubmitting = false;

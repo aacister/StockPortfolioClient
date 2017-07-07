@@ -1,0 +1,12 @@
+<div class="home-page">
+
+  <div class="banner">
+    <div class="container">
+      <ul *showAuthed="true" class="nav navbar-nav">
+        <li><a routerLink="userStocks" routerLinkActive="active">Stocks</a></li>
+        <li><a routerLink="userNews" routerLinkActive="active">News</a></li>
+      </ul>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

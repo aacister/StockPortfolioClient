@@ -1,13 +1,15 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { HomeComponent } from './home.component';
-import {homeRouting } 			from './home.routing';
 import { HomeAuthResolver } from './home-auth-resolver.service';
+import {homeRouting } 			from './home.routing';
+import { SharedModule } from '../shared';
 
 
 @NgModule({
     imports: [
-	  homeRouting
+	  homeRouting,
+    SharedModule
     ],
     declarations: [
       HomeComponent

@@ -5,13 +5,14 @@ import { User} from '../models';
 @Injectable()
 export class JwtService {
 
-  getToken(): String {
+  getToken(): string {
     return window.localStorage['stockPortfolio-token'];
+
   }
 
 
   saveToken(user: User) {
-    window.localStorage['stockPortfolio-token'] = user.token;
+//    window.localStorage['stockPortfolio-token'] = user.token;
      window.localStorage.setItem('stockPortfolio-token', JSON.stringify({ username: user.userName, token: user.token }));
   }
 
