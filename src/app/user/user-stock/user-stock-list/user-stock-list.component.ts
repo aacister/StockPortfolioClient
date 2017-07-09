@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import {User, StockQuote, UserStockQuoteStore} from '../../shared';
+import {User, StockQuote, UserStockQuoteStore} from '../../../shared';
 
 
 @Component({

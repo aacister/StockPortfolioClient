@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StockQuote} from '../../shared';
+import { StockQuote} from '../../../shared';
 
 @Component({
  selector: 'user-stock-row',

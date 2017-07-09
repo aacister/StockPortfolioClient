@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {HomeModule} from './home/home.module';
 import { AuthModule} from './auth/auth.module';
 import { StockModule} from './stock/stock.module';
-import { UserStockModule } from './user-stock/user-stock.module';
+import { UserModule } from './user/user.module';
 
 
 import {
@@ -43,7 +43,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
     AuthModule,
     HomeModule,
     StockModule,
-    UserStockModule,
+    UserModule,
     rootRouting
   ],
   providers: [
