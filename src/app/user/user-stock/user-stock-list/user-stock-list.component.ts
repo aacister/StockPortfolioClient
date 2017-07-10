@@ -26,6 +26,7 @@ export class UserStockListComponent implements OnInit{
 	}
 
 	private loadStocks(){
+				console.log('loading stocks.');
         this.userStockQuoteStore.loadData('aacister');
     }
 

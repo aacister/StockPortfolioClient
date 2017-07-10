@@ -23,9 +23,11 @@ export class UserStockQuoteStore{
 	}
 
 	loadData(username: string){
+		console.log('loadData: ' + username);
 		this.usersService.getStockQuotes(username)
 			.subscribe(
 				quotes => {
+					console.log('quotes: ' + JSON.stringify(quotes));
 					this.dataStore.userQuotes = quotes;
 					this._userQuotes.next(Object.assign({}, this.dataStore).userQuotes);
 				},
@@ -46,6 +48,7 @@ export class UserStockQuoteStore{
 		deleteStockQuote(username: string, symbol: string){
 			this.usersService.removeStockQuote(username, symbol)
 			.subscribe(response => {
+
 						this.dataStore.userQuotes.forEach((s, i) => {
 						if (s.symbol === symbol) {
 								this.dataStore.userQuotes.splice(i, 1);

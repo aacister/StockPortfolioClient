@@ -35,27 +35,31 @@ export class AuthService {
 
    if (token) {
      let objToken = JSON.parse(token);
-     console.log('Username: ' + objToken.username);
-     console.log('User token: ' + objToken.token);
-     let username = objToken.username;
-     this._http.get(`${environment.api_url}/users/${username}`,
-     {headers: this.apiService.setHeaders()})
-     .catch(this.apiService.formatErrors)
-     .map((res: Response) => res.json())
-    . map((user: any) => {
-       return new User(
-         user.userName,
-         user.token,
-         user.firstName,
-         user.lastName,
-         user.zip,
-         user.stocks,
-         user.news
-         );
-     })
-     .subscribe((user:User) => this.setAuth(user),
-        err => this.purgeAuth()
-      );
+     if(objToken.token){
+       console.log('Username: ' + objToken.username);
+       console.log('User token: ' + objToken.token);
+       let username = objToken.username;
+       this._http.get(`${environment.api_url}/users/${username}`,
+       {headers: this.apiService.setHeaders()})
+       .catch(this.apiService.formatErrors)
+       .map((res: Response) => res.json())
+      . map((user: any) => {
+         return new User(
+           user.userName,
+           user.token,
+           user.firstName,
+           user.lastName,
+           user.zip,
+           user.stocks,
+           user.news
+           );
+       })
+       .subscribe((user:User) => this.setAuth(user),
+          err => this.purgeAuth()
+        );
+      }
+      else
+        this.purgeAuth();
    }
    else
    {

@@ -18,7 +18,7 @@ export class UsersService{
 
 	getStockQuotes(username: string): Observable<any>
 	{
-		return this._http.get(`${environment.api_url}/users/{username}/stockquotes`,
+		return this._http.get(`${environment.api_url}/users/${username}/stockquotes`,
 			{headers: this.apiService.setHeaders()})
 			.catch(this.apiService.formatErrors)
 			.map((res) => {

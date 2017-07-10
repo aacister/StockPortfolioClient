@@ -4,7 +4,7 @@ import { UserHomeComponent} from './user-home/user-home.component';
 import { UserStockHomeComponent } from './user-stock/user-stock-home/user-stock-home.component';
 
 export const userRouting = RouterModule.forChild([
-    { path: 'user:username',
+    { path: 'user/:username',
 	  component: UserHomeComponent
 		,
 	  children:

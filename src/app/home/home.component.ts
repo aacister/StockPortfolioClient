@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../shared';
+import { AuthService, User } from '../shared';
 
 @Component({
   selector: 'home',
@@ -14,25 +14,32 @@ export class HomeComponent {
     private authService: AuthService) {
 }
 
-isAuthenticated: boolean;
+private isAuthenticated: boolean;
+private currentUser: User
 
 ngOnInit() {
     this.authService.isAuthenticated.subscribe(
       (authenticated) => {
         this.isAuthenticated = authenticated;
 
-        if (authenticated) {
-          this.setPageTo('user');
-        } else {
-          this.setPageTo('all');
-        }
+        if (authenticated){
+
+          this.authService.currentUser.subscribe(
+            (userData) => {
+              this.currentUser = userData;
+              this.setPageTo('user', this.currentUser.userName);
+            }
+          )
+          }
       }
     );
+
+
 }
 
-setPageTo(type: string = '') {
-    if (type === 'user' && !this.isAuthenticated) {
-      this.router.navigateByUrl('/login');
+setPageTo(type: string = '', username: string = '') {
+    if (type === 'user' && this.isAuthenticated && username.length > 0 ) {
+      this.router.navigate(['user', username]);
       return;
     }
   }
