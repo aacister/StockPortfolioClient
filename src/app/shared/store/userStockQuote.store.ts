@@ -11,7 +11,8 @@ import {environment } from '../../../environments/environment';
 
 @Injectable()
 export class UserStockQuoteStore{
-	userQuotes: Observable<StockQuote[]>;
+
+	public userQuotes: Observable<StockQuote[]>;
 	private _userQuotes: BehaviorSubject<StockQuote[]>;
 	private dataStore: {userQuotes: StockQuote[] };
 
