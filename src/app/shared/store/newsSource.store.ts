@@ -14,23 +14,23 @@ export class NewsSourceStore{
 	newsSources: Observable<NewsSource[]>;
 	private _newsSources: BehaviorSubject<NewsSource[]>;
 	private dataStore: {newsSources: NewsSource[] };
-	
+
 	constructor(private newsSourcesService: NewsSourcesService){
 		this.dataStore = { newsSources: [] };
 		this._newsSources = new BehaviorSubject([]);
-		this.newsSources = this._newsSources.asObservable();
-		
+		this.newsSources = this._newsSources.asObservable().distinctUntilChanged();
+
 	}
-	
+
 	loadData(){
 		this.newsSourcesService.getNewsSources()
 			.subscribe(
-				(sources) => {	
+				(sources) => {
 					this.dataStore.newsSources = sources;
 					this._newsSources.next(Object.assign({}, this.dataStore).newsSources);
 				},
 				err => console.log("Error retrieving news sources."));
-			
+
 	}
 
 	addNewsSource(source: NewsSource) {
@@ -42,5 +42,5 @@ export class NewsSourceStore{
 		));
   	}
 
-	
+
 }

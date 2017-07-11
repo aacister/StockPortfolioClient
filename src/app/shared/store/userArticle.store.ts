@@ -18,7 +18,7 @@ export class UserArticleStore{
 	constructor(private usersService: UsersService){
 		this.dataStore = { userArticles: [] };
 		this._userArticles = new BehaviorSubject([]);
-		this.userArticles = this._userArticles.asObservable();
+		this.userArticles = this._userArticles.asObservable().distinctUntilChanged();
 
 	}
 

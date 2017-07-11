@@ -14,14 +14,14 @@ export class StockStore{
 	stocks: Observable<Stock[]>;
 	private _stocks: BehaviorSubject<Stock[]>;
 	private dataStore: {stocks: Stock[] };
-	
+
 	constructor(private stocksService: StocksService){
 		this.dataStore = { stocks: [] };
 		this._stocks = new BehaviorSubject([]);
-		this.stocks = this._stocks.asObservable();
-		
+		this.stocks = this._stocks.asObservable().distinctUntilChanged();
+
 	}
-	
+
 	loadData(){
 		this.stocksService.getStocks()
 			.subscribe(
@@ -31,7 +31,7 @@ export class StockStore{
 				},
 				err => console.log("Error retrieving stocks")
 			);
-					
+
 	}
 
 	addStock(stock: Stock) {
@@ -55,5 +55,5 @@ export class StockStore{
       		this._stocks.next(Object.assign({}, this.dataStore).stocks);
     		}, error => console.log('Could not delete stock.'));
   	}
-	
+
 }

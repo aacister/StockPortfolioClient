@@ -3,6 +3,7 @@ export class UserStock {
 	name: string;
 	lastPrice: number;
 	percentChange: number;
+	current: string;
 	open: number;
 	high: number;
 	low: number;
@@ -11,8 +12,8 @@ export class UserStock {
 	logoUrl: string;
 
 
-	constructor(symbol: string, 
-			name: string, 
+	constructor(symbol: string,
+			name: string,
 			lastPrice: number,
 			percentChange: number,
 			open: number,
@@ -24,6 +25,7 @@ export class UserStock {
 		this.symbol = symbol;
 		this.name = name;
 		this.percentChange = percentChange;
+		this.current =  (percentChange >0) ? (open * (percentChange*.01)).toFixed(2) : (open -(open * (percentChange *.01))).toFixed(2);
 		this.open = open;
 		this.high = high;
 		this.low = low;

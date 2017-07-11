@@ -29,6 +29,7 @@ export class UserHomeComponent {
             {
               this.route.params.subscribe(params =>
               {
+                console.log('Params: ' + JSON.stringify(params));
                 this.username = params['username'];
                 console.log('Username: ' + this.username);
 

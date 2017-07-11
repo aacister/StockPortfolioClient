@@ -12,30 +12,27 @@ import {User, StockQuote, UserStockQuoteStore} from '../../../shared';
 })
 
 export class UserStockListComponent implements OnInit{
- private userStockQuoteList : Observable<StockQuote[]> = [];
- private username : string
- 
+
+ private username : string = '';
+ private stockQuotes : Observable<StockQuote[]>;
+
 
 	constructor(private route: ActivatedRoute,
      private router: Router,
 		private userStockQuoteStore: UserStockQuoteStore
 	) {
-
 	}
 
 	ngOnInit() {
-	this.userStockQuoteList = this.userStockQuoteStore.userQuotes;
-	this.route.params.subscribe(params =>
-	{
-		this.username = params['username'];
-		console.log('Username: ' + this.username);
-		this.loadStocks();
+		this.stockQuotes = this.userStockQuoteStore.userQuotes;
+		this.route.parent.params.subscribe(params =>
+		{
+		  console.log('Params: ' + JSON.stringify(params));
+			this.username = params['username'];
+			console.log('Username: ' + this.username);
+			this.loadStocks();
 
-	});
-
-
-
-		this.loadStocks();
+		});
 
 	}
 

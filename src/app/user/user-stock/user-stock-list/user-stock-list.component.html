@@ -1,19 +1,28 @@
-<table  class="table table-responsive">
-	<thead class="thead-inverse">
-		<tr>
+<div class="table-responsive">
+<table  class="table">
+<thead>
+<tr>
 			<th>Symbol</th>
-			<th>Last Price</th>
-			<th>Change</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Open</th>
+			<th>Low</th>
+			<th>High</th>
 			<th>Change %</th>
-	</tr>
+</tr>
 </thead>
 <tbody>
-<user-stock-row
-	*ngFor="let quote of userStockQuoteList"
-		[quote]="quote"
->
-</user-stock-row>
+			<tr
+				*ngFor="let quote of stockQuotes | async"
 
-
+			><td> {{quote.symbol}}</td>
+	    <td>{{quote.name}}</td>
+			<td>{{quote.current}}</td>
+			<td>{{quote.open}}</td>
+			<td>{{quote.low}}</td>
+			<td> {{quote.high}}</td>
+			<td>{{quote.percentChange}}</td>
+</tr>
 </tbody>
 </table>
+</div>

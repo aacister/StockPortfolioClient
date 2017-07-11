@@ -19,7 +19,7 @@ export class UserStockQuoteStore{
 	constructor(private usersService: UsersService){
 		this.dataStore = { userQuotes: [] };
 		this._userQuotes = new BehaviorSubject([]);
-		this.userQuotes = this._userQuotes.asObservable();
+		this.userQuotes = this._userQuotes.asObservable().distinctUntilChanged();
 
 	}
 

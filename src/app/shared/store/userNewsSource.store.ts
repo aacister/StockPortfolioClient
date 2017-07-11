@@ -18,7 +18,7 @@ export class UserNewsSourceStore{
 	constructor(private usersService: UsersService){
 		this.dataStore = { userNewsSources: [] };
 		this._userNewsSources = new BehaviorSubject([]);
-		this.userNewsSources = this._userNewsSources.asObservable();
+		this.userNewsSources = this._userNewsSources.asObservable().distinctUntilChanged();
 
 	}
 

@@ -35,6 +35,7 @@ export class UsersService{
 						quote.close,
 						quote.volume
 					));
+				console.log('Inside users.service. Quotes = ' + JSON.stringify(quotes));
 				return quotes;
 			});
 	}
