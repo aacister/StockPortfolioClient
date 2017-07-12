@@ -1,7 +1,20 @@
+
+
 <div class="table-responsive">
 <table  class="table">
 <thead>
 <tr>
+<th colspan="8" >
+	<div style="float: right; margin-right:50px; margin-bottom: 15px;">
+	<a style="cursor: pointer" (click)="add()">
+		<span class="glyphicon glyphicon-plus"></span>
+	</a>
+	Add Symbol
+</div>
+</th>
+</tr>
+<tr>
+			<th></th>
 			<th>Symbol</th>
 			<th>Name</th>
 			<th>Price</th>
@@ -13,9 +26,11 @@
 </thead>
 <tbody>
 			<tr
-				*ngFor="let quote of stockQuotes | async"
-
-			><td> {{quote.symbol}}</td>
+				*ngFor="let quote of stockQuotes | async">
+			<td><button class="btn btn-danger btn-sm" (click)="delete(quote)">
+          <span class="glyphicon glyphicon-remove"></span> Remove
+        </button></td>
+			<td> {{quote.symbol}}</td>
 	    <td>{{quote.name}}</td>
 			<td>{{quote.current}}</td>
 			<td>{{quote.open}}</td>

@@ -10,7 +10,7 @@ export const userRouting = RouterModule.forChild([
 	  children:
 	  [
   		{
-  			path: 'stocks',
+  			path: '',
   			component: UserStockHomeComponent
 
   		},

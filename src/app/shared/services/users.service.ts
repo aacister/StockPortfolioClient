@@ -65,7 +65,7 @@ export class UsersService{
 	removeStockQuote(username: string, symbol: string) : Observable<any>
 	{
 		return this._http.delete(
-			`${environment.api_url}/users/{username}/stockquotes/{symbol}`,
+			`${environment.api_url}/users/${username}/stockquotes/${symbol}`,
 			{ headers: this.apiService.setHeaders()})
 			.catch(this.apiService.formatErrors);
 

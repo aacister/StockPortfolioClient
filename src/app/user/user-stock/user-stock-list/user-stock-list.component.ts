@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import {User, StockQuote, UserStockQuoteStore} from '../../../shared';
+import {User, StockQuote,  UserStockQuoteStore} from '../../../shared';
 
 
 @Component({
@@ -36,12 +36,17 @@ export class UserStockListComponent implements OnInit{
 
 	}
 
-	private loadStocks(){
-
-				console.log('loading stocks.');
+	loadStocks(){
         this.userStockQuoteStore.loadData(this.username);
     }
 
+		delete(quote) {
 
+	    this.userStockQuoteStore.deleteStockQuote(this.username, quote.symbol);
+	  }
+
+		add(event) {
+
+  }
 
 }

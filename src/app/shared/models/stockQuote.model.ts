@@ -24,7 +24,7 @@ export class StockQuote {
 		this.symbol = symbol;
 		this.name = name;
 		this.percentChange = percentChange;
-		this.current = (percentChange >0) ? (open * (percentChange*.01)).toFixed(2) : (open -(open * (percentChange *.01))).toFixed(2);
+		this.current = (percentChange >0) ? (open * (1 + (percentChange*.01))).toFixed(2) : (open -(open * (percentChange *.01))).toFixed(2);
 		this.open = open;
 		this.high = high;
 		this.low = low;
