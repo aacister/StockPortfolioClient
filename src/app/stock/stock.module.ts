@@ -1,19 +1,18 @@
 import { NgModule }            from '@angular/core';
 
-import {stockRouting } 			from './stock.routing';
-//import { StockQuoteComponent }    from './stock-quote/stock-quote.component';
-
 import { SharedModule} from '../shared';
+import { StockAddComponent } from './stock-add/stock-add.component';
 
 @NgModule({
     imports: [
-
 		SharedModule
-	//	stockRouting
     ],
     declarations: [
-     //   StockQuoteComponent
+       StockAddComponent
 
+    ],
+    exports: [
+      StockAddComponent
     ],
     providers: []
 })

@@ -1,0 +1,13 @@
+<div>
+    <div>
+        <input type="text" [(ngModel)]=filterKey (keyup)=filter()>
+        <label for="country">Stock</label>
+    </div>
+    <div *ngIf="filteredItems.length > 0">
+        <div *ngFor="let item of filteredItems">
+            <div>
+                <a (click)="select(item)">{{item.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

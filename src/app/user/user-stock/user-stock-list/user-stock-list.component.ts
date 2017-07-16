@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {User, StockQuote,  UserStockQuoteStore} from '../../../shared';
+import {StockAddComponent} from '../../../stock/stock-add/stock-add.component';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class UserStockListComponent implements OnInit{
 		private userStockQuoteStore: UserStockQuoteStore
 	) {
 	}
+
 
 	ngOnInit() {
 		this.stockQuotes = this.userStockQuoteStore.userQuotes;

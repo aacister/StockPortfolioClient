@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 
-
 @NgModule({
   imports: [
     CommonModule,
